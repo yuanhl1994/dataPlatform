@@ -27,7 +27,13 @@ module.exports = (env) => {
             quiet: true
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js', '.jsx']
+            extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            alias: {
+                '@': path.resolve(__dirname, 'src/containers'),
+                '#': path.resolve(__dirname, 'src/components'),
+                '$': path.resolve(__dirname, 'src/services'),
+                '%': path.resolve(__dirname, 'src/utils')
+            }
         },
         module: {
             rules: [

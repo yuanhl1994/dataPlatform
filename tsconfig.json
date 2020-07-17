@@ -7,6 +7,13 @@
       "target": "ESNext",
       "jsx": "react",
       "esModuleInterop": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/containers/*"],
+        "#/*": ["src/components/*"],
+        "$/*": ["src/services/*"],
+        "%/*": ["src/utils/*"],
+      }
     },
     "include": [
       "src/**/*"

@@ -1,7 +1,8 @@
 // 全局样式配置
 
 module.exports = {
-    '@primary-color': '#ff6e00', // 全局主色
+    // '@primary-color': '#ff6e00', // 全局主色
+    '@primary-color': '#0079FE',
     '@link-color': '#1890ff', // 链接色
     '@success-color': '#52c41a', // 成功色
     '@warning-color': '#faad14', // 警告色
@@ -14,4 +15,4 @@ module.exports = {
     '@border-radius-base': '4px', // 组件/浮层圆角
     '@border-color-base': '#d9d9d9', // 边框色
     '@box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)' // 浮层阴影
-};
+}
