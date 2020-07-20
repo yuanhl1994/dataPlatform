@@ -61,16 +61,17 @@ const Home = (props: Props) => {
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout>
+        <Layout
+          style={{
+            padding: 24,
+            margin: 0,
+            marginLeft: '8px',
+            minHeight: 280,
+            backgroundColor: '#fff'
+          }}
+        >
           <Content
             className="site-layout-background"
-            style={{
-                padding: 24,
-                margin: 0,
-                marginLeft: '8px',
-                minHeight: 280,
-                backgroundColor: '#fff'
-            }}
           >
             <Switch>
               <Route path='/home/user' component={User} />

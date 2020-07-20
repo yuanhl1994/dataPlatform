@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Input, Select, Button,Table } from 'antd'
 
+import CustomChart from './chart'
 import './style.less'
 
 const FormItem = Form.Item
@@ -24,7 +25,7 @@ const options = [
     label: '品牌四'
   },
 ]
-const data = [
+const tmpData = [
   {
     key: 1,
     name: 'John Brown',
@@ -34,6 +35,9 @@ const data = [
     latelyTime:'7月1日',
     joinTime:'2月10日',
     description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
+    day: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8, 0.7, 0.6, 0.2],
+    week: [0.3, 0.2, 0.5, 0.2, 0.8, 0.5, 0.8],
+    month: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
   },
   {
     key: 2,
@@ -44,6 +48,9 @@ const data = [
     joinTime:'2月10日',
     address: 'London No. 1 Lake Park',
     description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
+    day: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8, 0.7, 0.6, 0.2],
+    week: [0.3, 0.2, 0.5, 0.2, 0.8, 0.5, 0.8],
+    month: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
   },
   {
     key: 3,
@@ -65,8 +72,32 @@ const data = [
     address: 'Sidney No. 1 Lake Park',
     description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
   },
-];
+]
+
+const columns = [
+  { title: '产品名称', dataIndex: 'name', key: 'name' },
+  { title: '所属平台', dataIndex: 'age', key: 'age' },
+  { title: '所属品牌', dataIndex: 'address', key: 'address' },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    key: 'status',
+    render:item=>item?'有货':'无货'
+  },
+  {
+    title: '最近状态时间',
+    dataIndex: 'latelyTime',
+    key: 'latelyTime',
+  },
+  {
+    title: '加入时间',
+    dataIndex: 'joinTime',
+    key: 'joinTime',
+  },
+]
+
 const GoodsList = () => {
+
 
   let defaultFilter = {
     // 筛选条件
@@ -77,27 +108,8 @@ const GoodsList = () => {
   }
 
   const [filter, setFilter] = useState(defaultFilter)
-  const columns = [
-    { title: '产品名称', dataIndex: 'name', key: 'name' },
-    { title: '所属平台', dataIndex: 'age', key: 'age' },
-    { title: '所属品牌', dataIndex: 'address', key: 'address' },
-    {
-      title: '状态',
-      dataIndex: 'status',
-      key: 'status',
-      render:item=>item?'有货':'无货'
-    },
-    {
-      title: '最近状态时间',
-      dataIndex: 'latelyTime',
-      key: 'latelyTime',
-    },
-    {
-      title: '加入时间',
-      dataIndex: 'joinTime',
-      key: 'joinTime',
-    },
-  ];
+  const [data, setData] = useState(tmpData)
+  
   return (
     <div className="goods-list">
       <div className='top'>
@@ -140,7 +152,7 @@ const GoodsList = () => {
         <Table
           columns={columns}
           expandable={{
-            expandedRowRender: record => <p style={{ margin: 0 }}>{record.description}</p>,
+            expandedRowRender: record => <CustomChart day={record.day} week={record.week} month={record.month} />,
           }}
           dataSource={data}
         />
