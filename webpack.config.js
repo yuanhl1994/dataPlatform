@@ -1,11 +1,11 @@
-const webpack = require('webpack');
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const tsImportPluginFactory = require('ts-import-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const tsImportPluginFactory = require('ts-import-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-const modifyVars = require('./config/modifyVars');
+const modifyVars = require('./config/modifyVars')
 
 module.exports = (env) => {
     let config = {
@@ -31,7 +31,6 @@ module.exports = (env) => {
             alias: {
                 '@': path.resolve(__dirname, 'src/containers'),
                 '#': path.resolve(__dirname, 'src/components'),
-                '$': path.resolve(__dirname, 'src')
             }
         },
         module: {
@@ -117,7 +116,7 @@ module.exports = (env) => {
                 name: 'vendor'
             }
         }
-    };
+    }
 
-    return config;
+    return config
 };

@@ -13,7 +13,7 @@ import axios from './axios'
 export const tokenLogin = async (data: { token: string }) => {
   const res = await axios.post('/tokenlogin', data)
   console.log('hjh', res)
-  return res || ({ errcode:0, data: { token: 'sdfsdfsdfsdfsfds' } })
+  return res || ({ errcode:0, message: '登录成功' })
 }
 
 // 账户登录
@@ -25,5 +25,5 @@ export const userLogin = async (data: { account: string, password: string }) => 
 // 用户注册
 export const userRegister = async (data: { account: string, password: string, code: string }) => {
   const res = await axios.post('/userregister', data)
-  return res
+  return res || ({ errcode: 0, data: { token: 'sdfsdfsdfs' } })
 }
