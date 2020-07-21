@@ -3,12 +3,11 @@ import { Layout, Menu } from 'antd'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import User from '../User'
+import User from '@/User'
 import PassChange from '@/PassChange'
 import GoodsList from '@/GoodsList'
 import CreateGoods from '@/CreateGoods'
-import Login from '@/Login'
-import Signup from '@/Signup'
+import { tokenLogin } from '../../services'
 
 import './style.less'
 
@@ -36,11 +35,18 @@ const Home = (props: Props) => {
     setKey(key)
     history.push(`/home/${key}`)
   }
-  let isHideMenu = false
 
-  if (history.location.pathname.indexOf('login') > -1 || history.location.pathname.indexOf('signup') > -1) {
-      isHideMenu = true
-  }
+  useEffect(() => {
+    const token = localStorage.getItem('wb_token')
+    if (!token) {
+      history.push('/login')
+    } else {
+        tokenLogin({ token }).then(res => {
+          console.log('sd', res)
+        })
+    }
+  }, [])
+
   return (
     <Layout style={{ height: '100vh' }}>
       <Header className="header" style={{ backgroundColor: '#fff', marginBottom: '8px' }}>
@@ -50,27 +56,25 @@ const Home = (props: Props) => {
         </div>
       </Header>
       <Layout>
-        {
-          isHideMenu ? null:
-          <Sider width={200} className="site-layout-background">
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={[key]}
-              defaultOpenKeys={['sub1']}
-              style={{ height: '100%', borderRight: 0 }}
-              onClick={toRoute}
-            >
-              <SubMenu key="sub1" icon={<UserOutlined />} title="个人信息">
-                <Menu.Item key="user">个人信息</Menu.Item>
-                <Menu.Item key="pass">更改密码</Menu.Item>
-              </SubMenu>
-              <SubMenu key="sub2" icon={<LaptopOutlined />} title="货物列表">
-                <Menu.Item key="goodslist">货物列表</Menu.Item>
-                <Menu.Item key="creategoods">新建货物</Menu.Item>
-              </SubMenu>
-            </Menu>
-          </Sider>
-        }
+        <Sider width={200} className="site-layout-background">
+          <Menu
+            mode="inline"
+            selectedKeys={[key]}
+            // defaultSelectedKeys={[key]}
+            defaultOpenKeys={['sub1', 'sub2']}
+            style={{ height: '100%', borderRight: 0 }}
+            onClick={toRoute}
+          >
+            <SubMenu key="sub1" icon={<UserOutlined />} title="个人信息">
+              <Menu.Item key="user">个人信息</Menu.Item>
+              <Menu.Item key="pass">更改密码</Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub2" icon={<LaptopOutlined />} title="货物列表">
+              <Menu.Item key="goodslist">货物列表</Menu.Item>
+              <Menu.Item key="creategoods">新建货物</Menu.Item>
+            </SubMenu>
+          </Menu>
+        </Sider>
         
         <Layout
           style={{
@@ -78,7 +82,7 @@ const Home = (props: Props) => {
             margin: 0,
             marginLeft: '8px',
             minHeight: 280,
-            backgroundColor: isHideMenu ? '#f0f2f5':'#fff'
+            backgroundColor: '#fff'
           }}
         >
           <Content
@@ -89,8 +93,6 @@ const Home = (props: Props) => {
               <Route exact path='/home/pass' component={PassChange} />
               <Route exact path='/home/goodslist' component={GoodsList} />
               <Route exact path='/home/creategoods' component={CreateGoods} />
-              <Route exact path='/home/login' component={Login} />
-              <Route exact path='/home/signup' component={Signup} />
               <Redirect to='/home/user' />
             </Switch>
           </Content>

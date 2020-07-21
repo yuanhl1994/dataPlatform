@@ -2,6 +2,7 @@ import React,{useState, Fragment} from 'react'
 import { UserOutlined,LockOutlined,TagOutlined } from '@ant-design/icons'
 import { Button,Input } from 'antd'
 
+import { userRegister } from '$/services'
 import './style.less'
 
 interface Props {
@@ -9,8 +10,12 @@ interface Props {
   }
 const Signup = (props: Props) => {
     const {history} = props
-    console.log(history)
     const [noAccount,setNoAccount] = useState(history.location.search.indexOf('noAccount')>0?1:0)
+
+    const register = () => {
+
+    }
+    
     return (
         <div className='signup'>
             
@@ -27,7 +32,7 @@ const Signup = (props: Props) => {
                     />
                     <Button type="primary" style={{width:'100%',marginBottom:20}}>找回密码</Button>
                     <div className="signup-footer" >
-                        <div onClick={()=>history.push('/home/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
+                        <div onClick={()=>history.push('/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
                         <div onClick={()=>setNoAccount(0)}>注册账号</div>
                     </div>
                 </Fragment>:
@@ -47,9 +52,9 @@ const Signup = (props: Props) => {
                         prefix={<TagOutlined  className="site-form-item-icon" />}
                         style={{marginBottom:20}}
                     />
-                    <Button type="primary" style={{width:'100%',marginBottom:20}}>注册</Button>
+                    <Button type="primary" style={{width:'100%',marginBottom:20}} onClick={register}>注册</Button>
                     <div className="signup-footer" >
-                        <div onClick={()=>history.push('/home/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
+                        <div onClick={()=>history.push('/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
                     </div>
                 </Fragment>
             }

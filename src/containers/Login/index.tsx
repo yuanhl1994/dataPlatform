@@ -25,8 +25,8 @@ const Login = (props: Props) => {
             />
             <Button type="primary" style={{width:'100%',marginBottom:20}}>登录</Button>
             <div className="login-footer" >
-                <div onClick={()=>history.push('/home/signup')}>注册账号</div>
-                <div onClick={()=>history.push('/home/signup?noAccount=1')}>忘记密码</div>
+                <div onClick={()=>history.push('/signup')}>注册账号</div>
+                <div onClick={()=>history.push('/signup?noAccount=1')}>忘记密码</div>
             </div>
         </div>
     )

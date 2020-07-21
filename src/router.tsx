@@ -1,8 +1,9 @@
 import React from 'react'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import Home from './containers/Home'
-import NoMatch from './containers/NoMatch'
+import Home from '@/Home'
+import Login from '@/Login'
+import Signup from '@/Signup'
 
 export interface child {
     path?: string;
@@ -11,28 +12,33 @@ export interface child {
 
 const Router = () => {
     const routes: Array<child> = [
-        {
-            path: '/',
-            com: Home
-        },
+        // {
+        //     path: '/',
+        //     com: Home
+        // },
         {
             path: '/home',
             com: Home
         },
         {
-            com: NoMatch
+            path: '/login',
+            com: Login
+        },
+        {
+            path: '/signup',
+            com: Signup
         }
     ]
     return (
         <HashRouter>
             <Switch>
                 {
-                    routes.map(({ path, com }) => <Route key={path || 'no-match'} path={path} component={com} />)
+                    routes.map(({ path, com }) => <Route key={path} path={path} component={com} />)
                 }
                 <Redirect to='/home' />
             </Switch>
         </HashRouter>
     )
-};
+}
 
 export default Router
