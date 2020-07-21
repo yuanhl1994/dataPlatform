@@ -29,55 +29,86 @@ const tmpData = [
   {
     key: 1,
     name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
+    platform: 32,
+    brand: 'New York No. 1 Lake Park',
     status:1,
     latelyTime:'7月1日',
     joinTime:'2月10日',
     description: 'My name is John Brown, I am 32 years old, living in New York No. 1 Lake Park.',
-    day: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8, 0.7, 0.6, 0.2],
-    week: [0.3, 0.2, 0.5, 0.2, 0.8, 0.5, 0.8],
-    month: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+    day: [
+      // 返回13条数据 00:00 ~ 24:00
+      { label: '00:00', type: '数据源1', value: 0.2 },
+      { label: '02:00', type: '数据源1', value: 0.5 },
+      { label: '02:00', type: '数据源2', value: 0.3 },
+      { label: '04:00', type: '数据源1', value: 0.6 },
+      { label: '04:00', type: '数据源2', value: 0.7 },
+      { label: '06:00', type: '数据源1', value: 0.9 },
+      { label: '08:00', type: '数据源1', value: 0.6 },
+      { label: '10:00', type: '数据源1', value: 0.9 }
+    ],
+    week: [
+      // 返回7天的数据
+      { label: '1', type: '数据源1', value: 0.2 },
+      { label: '2', type: '数据源1', value: 0.5 },
+      { label: '2', type: '数据源2', value: 0.3 },
+      { label: '3', type: '数据源1', value: 0.6 },
+      { label: '3', type: '数据源2', value: 0.7 },
+      { label: '4', type: '数据源1', value: 0.9 },
+      { label: '5', type: '数据源1', value: 0.6 },
+      { label: '6', type: '数据源1', value: 0.9 },
+      { label: '7', type: '数据源1', value: 0.8 }
+    ],
+    month: [
+      // 返回30天的数据
+      { label: '7-15', type: '数据源1', value: 0.2 },
+      { label: '7-16', type: '数据源1', value: 0.5 },
+      { label: '7-16', type: '数据源2', value: 0.3 },
+      { label: '7-17', type: '数据源1', value: 0.6 },
+      { label: '7-17', type: '数据源2', value: 0.7 },
+      { label: '7-18', type: '数据源1', value: 0.9 },
+      { label: '7-19', type: '数据源1', value: 0.6 },
+      { label: '7-20', type: '数据源1', value: 0.9 },
+      { label: '7-21', type: '数据源1', value: 0.8 }
+    ]
   },
   {
     key: 2,
     name: 'Jim Green',
-    age: 42,
+    platform: 42,
     status:1,
     latelyTime:'7月1日',
     joinTime:'2月10日',
-    address: 'London No. 1 Lake Park',
+    brand: 'London No. 1 Lake Park',
     description: 'My name is Jim Green, I am 42 years old, living in London No. 1 Lake Park.',
-    day: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8, 0.7, 0.6, 0.2],
-    week: [0.3, 0.2, 0.5, 0.2, 0.8, 0.5, 0.8],
-    month: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
+    // day: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.8, 0.7, 0.6, 0.2],
+    // week: [0.3, 0.2, 0.5, 0.2, 0.8, 0.5, 0.8],
+    // month: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
   },
   {
     key: 3,
     name: 'Not Expandable',
-    age: 29,
+    platform: 29,
     status:0,
     latelyTime:'7月1日',
     joinTime:'2月10日',
-    address: 'Jiangsu No. 1 Lake Park',
+    brand: 'Jiangsu No. 1 Lake Park',
     description: 'This not expandable',
   },
   {
     key: 4,
     name: 'Joe Black',
-    age: 32,
+    platform: 32,
     status:1,
     latelyTime:'7月1日',
     joinTime:'2月10日',
-    address: 'Sidney No. 1 Lake Park',
-    description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
+    brand: 'Sidney No. 1 Lake Park',
   },
 ]
 
 const columns = [
   { title: '产品名称', dataIndex: 'name', key: 'name' },
-  { title: '所属平台', dataIndex: 'age', key: 'age' },
-  { title: '所属品牌', dataIndex: 'address', key: 'address' },
+  { title: '所属平台', dataIndex: 'platform', key: 'platform' },
+  { title: '所属品牌', dataIndex: 'brand', key: 'brand' },
   {
     title: '状态',
     dataIndex: 'status',
