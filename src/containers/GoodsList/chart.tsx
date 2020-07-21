@@ -15,28 +15,28 @@ let btnOptions = [
   { label: '最近30日', value: 'month' }
 ]
 
-const formatData = (arr, status) => {
-  let output = []
-  if (status == 'day') {
-    output = arr.map((item, index) => ({
-      day: index >= 10 ? `${index}:00` : `0${index}:00`,
-      value: item
-    }))
-  } else if (status == 'week') {
-    output = arr.map((item, index) => ({
-      day: index + 1,
-      value: item
-    }))
-  } else if (status == 'month') {
-    output = arr.map((item, index) => {
-      return ({
-        day: moment().subtract(index, 'days').format('MM-DD'),
-        value: item
-      })
-    })
-  }
-  return output
-} 
+// const formatData = (arr, status) => {
+//   let output = []
+//   if (status == 'day') {
+//     output = arr.map((item, index) => ({
+//       day: index*2 >= 10 ? `${index*2}:00` : `0${index*2}:00`,
+//       value: item
+//     }))
+//   } else if (status == 'week') {
+//     output = arr.map((item, index) => ({
+//       day: index + 1,
+//       value: item
+//     }))
+//   } else if (status == 'month') {
+//     output = arr.map((item, index) => {
+//       return ({
+//         day: moment().subtract(index, 'days').format('MM-DD'),
+//         value: item
+//       })
+//     })
+//   }
+//   return output
+// } 
 
 let chart
 
@@ -48,7 +48,6 @@ const CustomChart = (props: Props) => {
   const [status, setStatus] = useState('day')
 
   const handleChange = (e) => {
-    // chart.changeData(formatData(props[e.target.value], e.target.value))
     setStatus(e.target.value)
   }
 
@@ -59,9 +58,12 @@ const CustomChart = (props: Props) => {
       height: 400
     })
   
-    chart.data(formatData(props[status], status))
+    chart.data(props[status])
   
     chart.scale({
+      label: {
+        range: [0, 1]
+      },
       value: {
         min: 0,
         nice: true
@@ -73,19 +75,18 @@ const CustomChart = (props: Props) => {
       shared: true
     })
   
-    chart.line().position('day*value')
-    chart.point().position('day*value')
+    chart.line().position('label*value').color('type')
+    chart.point().position('label*value').color('type')
     chart.render()
   }, [])
 
   useEffect(() => {
-    chart.data(formatData(props[status], status))
+    chart.data(props[status])
     chart.render()
   }, [day, week, month])
 
   useEffect(() => {
-    // console.log('ds', status, chart)
-    chart.data(formatData(props[status], status))
+    chart.data(props[status])
     chart.render()
   }, [status])
   
