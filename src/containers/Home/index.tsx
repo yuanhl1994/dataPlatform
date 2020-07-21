@@ -36,16 +36,16 @@ const Home = (props: Props) => {
     history.push(`/home/${key}`)
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem('wb_token')
-    if (!token) {
-      history.push('/login')
-    } else {
-        tokenLogin({ token }).then(res => {
-          console.log('sd', res)
-        })
-    }
-  }, [])
+  // useEffect(() => {
+  //   const token = localStorage.getItem('wb_token')
+  //   if (!token) {
+  //     history.push('/login')
+  //   } else {
+  //       tokenLogin({ token }).then(res => {
+  //         console.log('sd', res)
+  //       })
+  //   }
+  // }, [])
 
   return (
     <Layout style={{ height: '100vh' }}>
