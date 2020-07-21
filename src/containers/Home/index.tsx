@@ -7,6 +7,9 @@ import User from '../User'
 import PassChange from '@/PassChange'
 import GoodsList from '@/GoodsList'
 import CreateGoods from '@/CreateGoods'
+import Login from '@/Login'
+import Signup from '@/Signup'
+
 import './style.less'
 
 const { SubMenu } = Menu
@@ -20,7 +23,7 @@ const routes = {
   '/home/user': 'user',
   '/home/pass': 'pass',
   '/home/goodslist': 'goodslist',
-  '/home/creategoods': 'creategoods'
+  '/home/creategoods': 'creategoods',
 }
 
 const Home = (props: Props) => {
@@ -33,7 +36,11 @@ const Home = (props: Props) => {
     setKey(key)
     history.push(`/home/${key}`)
   }
+  let isHideMenu = false
 
+  if (history.location.pathname.indexOf('login') > -1 || history.location.pathname.indexOf('signup') > -1) {
+      isHideMenu = true
+  }
   return (
     <Layout style={{ height: '100vh' }}>
       <Header className="header" style={{ backgroundColor: '#fff', marginBottom: '8px' }}>
@@ -43,31 +50,35 @@ const Home = (props: Props) => {
         </div>
       </Header>
       <Layout>
-        <Sider width={200} className="site-layout-background">
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={[key]}
-            defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
-            onClick={toRoute}
-          >
-            <SubMenu key="sub1" icon={<UserOutlined />} title="个人信息">
-              <Menu.Item key="user">个人信息</Menu.Item>
-              <Menu.Item key="pass">更改密码</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="货物列表">
-              <Menu.Item key="goodslist">货物列表</Menu.Item>
-              <Menu.Item key="creategoods">新建货物</Menu.Item>
-            </SubMenu>
-          </Menu>
-        </Sider>
+        {
+          isHideMenu ? null:
+          <Sider width={200} className="site-layout-background">
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={[key]}
+              defaultOpenKeys={['sub1']}
+              style={{ height: '100%', borderRight: 0 }}
+              onClick={toRoute}
+            >
+              <SubMenu key="sub1" icon={<UserOutlined />} title="个人信息">
+                <Menu.Item key="user">个人信息</Menu.Item>
+                <Menu.Item key="pass">更改密码</Menu.Item>
+              </SubMenu>
+              <SubMenu key="sub2" icon={<LaptopOutlined />} title="货物列表">
+                <Menu.Item key="goodslist">货物列表</Menu.Item>
+                <Menu.Item key="creategoods">新建货物</Menu.Item>
+              </SubMenu>
+            </Menu>
+          </Sider>
+        }
+        
         <Layout
           style={{
             padding: 24,
             margin: 0,
             marginLeft: '8px',
             minHeight: 280,
-            backgroundColor: '#fff'
+            backgroundColor: isHideMenu ? '#f0f2f5':'#fff'
           }}
         >
           <Content
@@ -78,6 +89,8 @@ const Home = (props: Props) => {
               <Route exact path='/home/pass' component={PassChange} />
               <Route exact path='/home/goodslist' component={GoodsList} />
               <Route exact path='/home/creategoods' component={CreateGoods} />
+              <Route exact path='/home/login' component={Login} />
+              <Route exact path='/home/signup' component={Signup} />
               <Redirect to='/home/user' />
             </Switch>
           </Content>
