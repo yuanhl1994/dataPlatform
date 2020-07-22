@@ -28,7 +28,8 @@ export const userRegister = async (data: { account: string, password: string, co
   return res || ({ errcode: 0, data: { token: 'sdfsdfsdfs' } })
 }
 
-export const getGoodLists = async (data: { token:string }) => {
+// 货物列表
+export const getGoodLists = async (data: { token:string, brand?: string, name?: string, platform?: string, status?: string }) => {
   const res = await axios.post('/getgoodLists', data)
   return res || 
   { errcode: 0, data:[
@@ -53,15 +54,15 @@ export const getGoodLists = async (data: { token:string }) => {
       ],
       week: [
         // 返回7天的数据
-        { label: '1', type: '数据源1', value: 0.2 },
-        { label: '2', type: '数据源1', value: 0.5 },
-        { label: '2', type: '数据源2', value: 0.3 },
-        { label: '3', type: '数据源1', value: 0.6 },
-        { label: '3', type: '数据源2', value: 0.7 },
-        { label: '4', type: '数据源1', value: 0.9 },
-        { label: '5', type: '数据源1', value: 0.6 },
-        { label: '6', type: '数据源1', value: 0.9 },
-        { label: '7', type: '数据源1', value: 0.8 }
+        { label: '7-13', type: '数据源1', value: 0.2 },
+        { label: '7-14', type: '数据源1', value: 0.5 },
+        { label: '7-15', type: '数据源2', value: 0.3 },
+        { label: '7-16', type: '数据源1', value: 0.6 },
+        { label: '7-17', type: '数据源2', value: 0.7 },
+        { label: '7-18', type: '数据源1', value: 0.9 },
+        { label: '7-19', type: '数据源1', value: 0.6 },
+        { label: '7-20', type: '数据源1', value: 0.9 },
+        { label: '7-21', type: '数据源1', value: 0.8 }
       ],
       month: [
         // 返回30天的数据
@@ -142,6 +143,49 @@ export const getGoodLists = async (data: { token:string }) => {
   ]}
 }
 
+// 货物列表筛选项
+export const getGoodsOptions = async (params: { token: string }) => {
+  const res = await axios.get('/getgoodsoptions', { params })
+  return res || ({ errcode: 0, data: {
+    brands: [
+      {
+        value: 'brand1',
+        label: '品牌一'
+      },
+      {
+        value: 'brand2',
+        label: '品牌二'
+      },
+      {
+        value: 'brand3',
+        label: '品牌三'
+      },
+      {
+        value: 'brand4',
+        label: '品牌四'
+      },
+    ],
+    platforms: [
+      {
+        value: 'brand1',
+        label: '平台一'
+      },
+      {
+        value: 'brand2',
+        label: '平台二'
+      },
+      {
+        value: 'brand3',
+        label: '平台三'
+      },
+      {
+        value: 'brand4',
+        label: '平台四'
+      },
+    ]
+  } })
+}
+
 // 测试手机号
 export const testMobile = async (data: { mobile: string }) => {
   const res = await axios.post('/testmobile', data)
@@ -159,3 +203,11 @@ export const saveUser = async (data: { nickname: string, mobile: string, email: 
   const res = await axios.post('/saveuser', data)
   return res || ({ errcode: 0, message: '' })
 }
+
+// 更改密码
+export const changePsd = async (data: { oldpsd: string, newpsd: string }) => {
+  const res = await axios.post('/changepsd', data)
+  return res || ({ errcode: 0 })
+}
+
+// 新建货物属性

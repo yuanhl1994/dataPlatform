@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Input, Select,Button } from 'antd'
 import './style.less'
 
-const {Option} = Select;
+const {Option} = Select
 
 const CreateGoods = () => {
   const [platformList,setPlatformList] = useState(['lucy','jack'])
