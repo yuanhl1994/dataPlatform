@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Input, Row, Col, Button, Radio, Modal, message } from 'antd'
 
-import { testMobile, testEmail } from '../../services'
+import { testMobile, testEmail, saveUser } from '../../services'
 import './style.less'
 
 const User = () => {
@@ -44,12 +44,24 @@ const User = () => {
   }
 
   const saveInfo = () => {
-    Modal.success({
-      title: '保存成功',
-      okText: '确定',
-      onOk: () => {
-        // Modal.destroyAll()
+    const params = {
+      nickname,
+      mobile: code + mobile,
+      email,
+      useMobile: mbMsg,
+      useEmail: emMsg
+    }
+    saveUser(params).then((res: any) => {
+      if (res.errcode) {
+        return message.error(res.message)
       }
+      Modal.success({
+        title: '保存成功',
+        okText: '确定',
+        onOk: () => {
+          // Modal.destroyAll()
+        }
+      })
     })
   }
   

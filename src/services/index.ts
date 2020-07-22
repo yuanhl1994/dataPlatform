@@ -155,4 +155,7 @@ export const testEmail = async (data: { email: string }) => {
 }
 
 // 保存个人信息
-// export const saveUser
+export const saveUser = async (data: { nickname: string, mobile: string, email: string, useMobile: number|string, useEmail: number|string }) => {
+  const res = await axios.post('/saveuser', data)
+  return res || ({ errcode: 0, message: '' })
+}
