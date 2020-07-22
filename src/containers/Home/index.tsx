@@ -29,23 +29,24 @@ const Home = (props: Props) => {
 
   const { history } = props
 
-  const [key, setKey] = useState(routes[history.location.pathname])
+  const [key, setKey] = useState('/home/user')
 
   const toRoute = ({ item, key }) => {
     setKey(key)
     history.push(`/home/${key}`)
   }
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('wb_token')
-  //   if (!token) {
-  //     history.push('/login')
-  //   } else {
-  //       tokenLogin({ token }).then(res => {
-  //         console.log('sd', res)
-  //       })
-  //   }
-  // }, [])
+  useEffect(() => {
+    setKey(routes[history.location.pathname])
+    const token = localStorage.getItem('wb_token')
+    if (!token) {
+      history.push('/login')
+    } else {
+        tokenLogin({ token }).then(res => {
+          console.log('sd', res)
+        })
+    }
+  }, [])
 
   return (
     <Layout style={{ height: '100vh' }}>

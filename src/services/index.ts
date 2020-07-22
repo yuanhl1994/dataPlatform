@@ -141,3 +141,18 @@ export const getGoodLists = async (data: { token:string }) => {
     },
   ]}
 }
+
+// 测试手机号
+export const testMobile = async (data: { mobile: string }) => {
+  const res = await axios.post('/testmobile', data)
+  return res || { errcode: 0, message: '已发送测试消息至手机' }
+}
+
+// 测试邮箱地址
+export const testEmail = async (data: { email: string }) => {
+  const res = await axios.post('/testemail', data)
+  return res || { errcode: 0, message: '已发送测试消息至邮箱' }
+}
+
+// 保存个人信息
+// export const saveUser

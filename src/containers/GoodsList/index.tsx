@@ -51,15 +51,6 @@ const columns = [
 
 const GoodsList = () => {
   const token = localStorage.getItem('wb_token')
-  useEffect(()=>{
-    getGoodLists({token}).then((res:any)=>{
-      setLoading(false)
-      if(res.errcode == 1){
-        message.error(res.message)
-      }
-      setData(res.data)
-    })
-  })
   let defaultFilter = {
     // 筛选条件
     brand: '',   //品牌
@@ -71,7 +62,16 @@ const GoodsList = () => {
   const [filter, setFilter] = useState(defaultFilter)
   const [data, setData] = useState([])
   const [loading,setLoading] = useState(true)
-  
+
+  useEffect(()=>{
+    getGoodLists({token}).then((res:any)=>{
+      setLoading(false)
+      if(res.errcode == 1){
+        message.error(res.message)
+      }
+      setData(res.data)
+    })
+  })
 
   return (
     <div className="goods-list">

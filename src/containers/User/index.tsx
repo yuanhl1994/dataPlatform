@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Input, Row, Col, Button, Radio, Modal } from 'antd'
+import { Input, Row, Col, Button, Radio, Modal, message } from 'antd'
 
+import { testMobile, testEmail } from '../../services'
 import './style.less'
 
 const User = () => {
@@ -13,22 +14,32 @@ const User = () => {
   const [emMsg, setEmMsg] = useState('1')
 
   const sendMsg = () => {
-    Modal.success({
-      title: '已发送测试消息到手机',
-      okText: '确定',
-      onOk: () => {
-        // Modal.destroyAll()
+    testMobile({ mobile: code + mobile }).then((res: any) => {
+      if (res.errcode) {
+        return message.error(res.message)
       }
+      Modal.success({
+        title: res.message,
+        okText: '确定',
+        onOk: () => {
+          // Modal.destroyAll()
+        }
+      })
     })
   }
 
   const sendEmail = () => {
-    Modal.success({
-      title: '已发送测试邮件到手机',
-      okText: '确定',
-      onOk: () => {
-        // Modal.destroyAll()
+    testEmail({ email }).then((res: any) => {
+      if (res.errcode) {
+        return message.error(res.message)
       }
+      Modal.success({
+        title: res.message,
+        okText: '确定',
+        onOk: () => {
+          // Modal.destroyAll()
+        }
+      })
     })
   }
 
