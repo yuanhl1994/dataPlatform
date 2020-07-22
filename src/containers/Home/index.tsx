@@ -7,6 +7,8 @@ import User from '@/User'
 import PassChange from '@/PassChange'
 import GoodsList from '@/GoodsList'
 import CreateGoods from '@/CreateGoods'
+import Login from '@/Login'
+import Signup from '@/Signup'
 import { tokenLogin } from '../../services'
 
 import './style.less'
@@ -36,11 +38,12 @@ const Home = (props: Props) => {
     history.push(`/home/${key}`)
   }
 
+  
   useEffect(() => {
     setKey(routes[history.location.pathname])
     const token = localStorage.getItem('wb_token')
     if (!token) {
-      history.push('/login')
+      history.push('/home/login')
     } else {
         tokenLogin({ token }).then(res => {
           console.log('sd', res)
@@ -48,6 +51,11 @@ const Home = (props: Props) => {
     }
   }, [])
 
+  let isHideMenu = false
+
+  if (history.location.pathname.indexOf('login') > -1 || history.location.pathname.indexOf('signup') > -1) {
+      isHideMenu = true
+  }
   return (
     <Layout style={{ height: '100vh' }}>
       <Header className="header" style={{ backgroundColor: '#fff', marginBottom: '8px' }}>
@@ -57,6 +65,8 @@ const Home = (props: Props) => {
         </div>
       </Header>
       <Layout>
+      {
+          isHideMenu ? null:
         <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
@@ -76,14 +86,14 @@ const Home = (props: Props) => {
             </SubMenu>
           </Menu>
         </Sider>
-        
+}
         <Layout
           style={{
             padding: 24,
             margin: 0,
             marginLeft: '8px',
             minHeight: 280,
-            backgroundColor: '#fff'
+            backgroundColor: isHideMenu ? '#f0f2f5':'#fff'
           }}
         >
           <Content
@@ -94,6 +104,8 @@ const Home = (props: Props) => {
               <Route exact path='/home/pass' component={PassChange} />
               <Route exact path='/home/goodslist' component={GoodsList} />
               <Route exact path='/home/creategoods' component={CreateGoods} />
+              <Route exact path='/home/login' component={Login} />
+              <Route exact path='/home/signup' component={Signup} />
               <Redirect to='/home/user' />
             </Switch>
           </Content>
