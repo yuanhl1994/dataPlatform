@@ -2,7 +2,7 @@ import React from 'react'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Home from '@/Home'
-import Entrance from '@/entrance'
+import Entrance from '@/Entrance'
 
 export interface child {
     path?: string;
