@@ -9,7 +9,7 @@ axios.defaults.withCredentials = true
 axios.interceptors.response.use(
     function(response: any) {
       if (response.data && response.data.errcode == 401) {
-        window.location.href = `/login`
+        window.location.href = `/entrance`
         return null
     }
         return response.data

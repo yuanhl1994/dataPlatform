@@ -1,8 +1,8 @@
 import React,{useState, Fragment} from 'react'
 import { UserOutlined,LockOutlined,TagOutlined } from '@ant-design/icons'
-import { Button,Input, message } from 'antd'
+import { Button,Input, message, Modal } from 'antd'
 
-import { userRegister } from '../../services'
+import { userRegister, retrievePassword } from '../../services'
 import './style.less'
 
 interface Props {
@@ -29,6 +29,24 @@ const Signup = (props: Props) => {
             history.push('/home')
         })
     }
+
+    const forgetPsd = () => {
+      if (!account) {
+        return message.error('请输入邮箱地址')
+      }
+      retrievePassword({ email: account }).then((res: any) => {
+        if (res.errcode) {
+          return message.error(res.message)
+        }
+        Modal.success({
+          title: res.message,
+          okText: '确定',
+          onOk: () => {
+            // Modal.destroyAll()
+          }
+        })
+      })
+    }
     
     return (
         <div className='signup'>
@@ -46,9 +64,9 @@ const Signup = (props: Props) => {
                         value={account}
                         onChange={e => setAccount(e.target.value)}
                     />
-                    <Button type="primary" style={{width:'100%',marginBottom:20}}>找回密码</Button>
+                    <Button type="primary" style={{width:'100%',marginBottom:20}} onClick={forgetPsd}>找回密码</Button>
                     <div className="signup-footer" >
-                        <div onClick={()=>history.push('/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
+                        <div onClick={()=>history.push('/entrance/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
                         <div onClick={()=>setNoAccount(0)}>注册账号</div>
                     </div>
                 </Fragment>:
@@ -76,7 +94,7 @@ const Signup = (props: Props) => {
                     />
                     <Button type="primary" style={{width:'100%',marginBottom:20}} onClick={register}>注册</Button>
                     <div className="signup-footer" >
-                        <div onClick={()=>history.push('/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
+                        <div onClick={()=>history.push('/entrance/login')}><span style={{color:'black'}}>已有账号？</span>进入登录页面</div>
                     </div>
                 </Fragment>
             }
