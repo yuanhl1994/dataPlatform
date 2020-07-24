@@ -2,8 +2,7 @@ import React from 'react'
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import Home from '@/Home'
-import Login from '@/Login'
-import Signup from '@/Signup'
+import Entrance from '@/Entrance'
 
 export interface child {
     path?: string;
@@ -21,12 +20,8 @@ const Router = () => {
             com: Home
         },
         {
-            path: '/login',
-            com: Login
-        },
-        {
-            path: '/signup',
-            com: Signup
+            path: '/entrance',
+            com: Entrance
         }
     ]
     return (

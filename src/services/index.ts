@@ -19,13 +19,19 @@ export const tokenLogin = async (data: { token: string }) => {
 // 账户登录
 export const userLogin = async (data: { account: string, password: string }) => {
   const res = await axios.post('/userlogin', data)
-  return res
+  return res || ({ errcode: 0, data: { token: 'sdfsdfsdf' } })
 }
 
 // 用户注册
 export const userRegister = async (data: { account: string, password: string, code: string }) => {
   const res = await axios.post('/userregister', data)
   return res || ({ errcode: 0, data: { token: 'sdfsdfsdfs' } })
+}
+
+// 找回密码
+export const retrievePassword = async (data: { email: string }) => {
+  const res = await axios.post('/retrievepassword', data)
+  return res || ({ errcode: 0, message: '密码已发送至邮箱' })
 }
 
 // 货物列表
@@ -210,4 +216,8 @@ export const changePsd = async (data: { oldpsd: string, newpsd: string }) => {
   return res || ({ errcode: 0 })
 }
 
-// 新建货物属性
+// 创建货物
+export const createGoods = async (data: { platform: string, brand: string, name: string, link: string }) => {
+  const res = await axios.post('/creategoods', data)
+  return res || ({ errcode: 0, message: '提交成功' })
+}

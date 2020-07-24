@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Form, Input, Select, Button,Table,message } from 'antd'
 
 import CustomChart from './chart'
-import './style.less'
 import { getGoodLists, getGoodsOptions } from '../../services'
+import './style.less'
 
 const FormItem = Form.Item
 const { Option } = Select
@@ -32,6 +32,7 @@ const columns = [
 
 const GoodsList = () => {
   const token = localStorage.getItem('wb_token')
+  
   let defaultFilter = {
     // 筛选条件
     brand: '',   //品牌
@@ -48,7 +49,7 @@ const GoodsList = () => {
   const [filter, setFilter] = useState(defaultFilter)
   const [data, setData] = useState([])
   const [opt, setOpt] = useState(defaultOptions)
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const getData = () => {
     const params = {
